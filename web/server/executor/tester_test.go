@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/smartystreets/goconvey/convey"
-	"github.com/smartystreets/goconvey/web/server/contract"
+	. "github.com/dgnsrekt/goconvey-notify/convey"
+	"github.com/dgnsrekt/goconvey-notify/web/server/contract"
 )
 
 func init() {

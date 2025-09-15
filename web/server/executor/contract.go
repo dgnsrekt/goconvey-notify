@@ -1,6 +1,6 @@
 package executor
 
-import "github.com/smartystreets/goconvey/web/server/contract"
+import "github.com/dgnsrekt/goconvey-notify/web/server/contract"
 
 type Parser interface {
 	Parse([]*contract.Package)

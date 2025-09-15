@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/smartystreets/goconvey/web/server/contract"
-	"github.com/smartystreets/goconvey/web/server/messaging"
+	"github.com/dgnsrekt/goconvey-notify/web/server/contract"
+	"github.com/dgnsrekt/goconvey-notify/web/server/messaging"
 )
 
 type NotificationConfig struct {

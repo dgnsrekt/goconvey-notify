@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/smartystreets/goconvey/convey/reporting"
+	"github.com/dgnsrekt/goconvey-notify/convey/reporting"
 )
 
 var goroutineRE = regexp.MustCompile(`goroutine \d+ \[`)

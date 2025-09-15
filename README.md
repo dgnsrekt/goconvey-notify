@@ -3,9 +3,9 @@
 **Enhanced GoConvey with Audio & Push Notifications**
 
 [![Build Status](https://app.travis-ci.com/smartystreets/goconvey.svg?branch=master)](https://app.travis-ci.com/smartystreets/goconvey)
-[![GoDoc](https://godoc.org/github.com/smartystreets/goconvey?status.svg)](http://godoc.org/github.com/smartystreets/goconvey)
+[![GoDoc](https://godoc.org/github.com/dgnsrekt/goconvey-notify?status.svg)](http://godoc.org/github.com/dgnsrekt/goconvey-notify)
 
-A fork of [GoConvey](https://github.com/smartystreets/goconvey) that adds intelligent audio alerts and push notifications to enhance your Go testing workflow.
+A fork of [GoConvey](https://github.com/dgnsrekt/goconvey-notify) that adds intelligent audio alerts and push notifications to enhance your Go testing workflow.
 
 ## What's New in GoConvey-Notify
 
@@ -120,7 +120,7 @@ This fork maintains full compatibility with GoConvey's core testing features. Fo
 - **Integration with `go test`**
 - **Test coverage and reporting**
 
-Please refer to the [original GoConvey documentation](https://github.com/smartystreets/goconvey/wiki).
+Please refer to the [original GoConvey documentation](https://github.com/dgnsrekt/goconvey-notify/wiki).
 
 ## API Reference
 
@@ -184,9 +184,9 @@ Standard GoConvey Options:
 
 ## Contributing
 
-This project builds on the excellent foundation of [GoConvey by SmartyStreets](https://github.com/smartystreets/goconvey).
+This project builds on the excellent foundation of [GoConvey by SmartyStreets](https://github.com/dgnsrekt/goconvey-notify).
 
-For issues specific to the notification features, please use this repository's issue tracker. For core GoConvey functionality, consider contributing to the [original project](https://github.com/smartystreets/goconvey).
+For issues specific to the notification features, please use this repository's issue tracker. For core GoConvey functionality, consider contributing to the [original project](https://github.com/dgnsrekt/goconvey-notify).
 
 ## License
 
@@ -194,4 +194,4 @@ This project maintains the same license as the original GoConvey project. See [L
 
 ---
 
-**Credits**: GoConvey-Notify is built on [GoConvey](https://github.com/smartystreets/goconvey) by [SmartyStreets](https://github.com/smartystreets) and [contributors](https://github.com/smartystreets/goconvey/graphs/contributors). Notification features added by [@dgnsrekt](https://github.com/dgnsrekt).
+**Credits**: GoConvey-Notify is built on [GoConvey](https://github.com/dgnsrekt/goconvey-notify) by [SmartyStreets](https://github.com/smartystreets) and [contributors](https://github.com/dgnsrekt/goconvey-notify/graphs/contributors). Notification features added by [@dgnsrekt](https://github.com/dgnsrekt).

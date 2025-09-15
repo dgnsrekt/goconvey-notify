@@ -11,8 +11,8 @@ GoConvey is a popular 2-pronged, open-source github project (1,600+ stargazers, 
 
 ----
 
-- https://github.com/smartystreets/goconvey
-- https://github.com/smartystreets/goconvey/wiki
+- https://github.com/dgnsrekt/goconvey-notify
+- https://github.com/dgnsrekt/goconvey-notify/wiki
 
 _I should mention that the [assertions package](https://github.com/smartystreets/assertions) imported by the convey package is used by other projects at SmartyStreets and so we will be continuing to maintain that project internally._
 

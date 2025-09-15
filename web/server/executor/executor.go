@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/smartystreets/goconvey/web/server/contract"
+	"github.com/dgnsrekt/goconvey-notify/web/server/contract"
 )
 
 const (

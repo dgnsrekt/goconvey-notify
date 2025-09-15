@@ -26,13 +26,13 @@ import (
 
 	"golang.org/x/tools/go/packages"
 
-	"github.com/smartystreets/goconvey/web/server/api"
-	"github.com/smartystreets/goconvey/web/server/contract"
-	"github.com/smartystreets/goconvey/web/server/executor"
-	"github.com/smartystreets/goconvey/web/server/messaging"
-	"github.com/smartystreets/goconvey/web/server/parser"
-	"github.com/smartystreets/goconvey/web/server/system"
-	"github.com/smartystreets/goconvey/web/server/watch"
+	"github.com/dgnsrekt/goconvey-notify/web/server/api"
+	"github.com/dgnsrekt/goconvey-notify/web/server/contract"
+	"github.com/dgnsrekt/goconvey-notify/web/server/executor"
+	"github.com/dgnsrekt/goconvey-notify/web/server/messaging"
+	"github.com/dgnsrekt/goconvey-notify/web/server/parser"
+	"github.com/dgnsrekt/goconvey-notify/web/server/system"
+	"github.com/dgnsrekt/goconvey-notify/web/server/watch"
 )
 
 func init() {

@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/smartystreets/goconvey/web/server/messaging"
+	"github.com/dgnsrekt/goconvey-notify/web/server/messaging"
 )
 
 ///////////////////////////////////////////////////////////////////////////////

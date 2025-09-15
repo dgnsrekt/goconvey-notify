@@ -2,9 +2,6 @@ module github.com/dgnsrekt/goconvey-notify
 
 go 1.21.7
 
-// This maps all internal imports to the new module
-replace github.com/smartystreets/goconvey => ./
-
 require (
 	github.com/jtolds/gls v4.20.0+incompatible
 	github.com/smarty/assertions v1.15.1
