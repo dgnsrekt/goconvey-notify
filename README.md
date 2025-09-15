@@ -1,125 +1,240 @@
-# SMARTY DISCLAIMER: Subject to the terms of the associated license agreement, this software is freely available for your use. This software is FREE, AS IN PUPPIES, and is a gift. Enjoy your new responsibility. This means that while we may consider enhancement requests, we may or may not choose to entertain requests at our sole and absolute discretion.
+# GoConvey-Notify 🔔
 
-GoConvey is awesome Go testing
-==============================
+**Enhanced GoConvey with Audio & Push Notifications**
 
 [![Build Status](https://app.travis-ci.com/smartystreets/goconvey.svg?branch=master)](https://app.travis-ci.com/smartystreets/goconvey)
 [![GoDoc](https://godoc.org/github.com/smartystreets/goconvey?status.svg)](http://godoc.org/github.com/smartystreets/goconvey)
 
+A fork of [GoConvey](https://github.com/smartystreets/goconvey) that adds intelligent audio alerts and push notifications to enhance your Go testing workflow.
 
-Welcome to GoConvey, a yummy Go testing tool for gophers. Works with `go test`. Use it in the terminal or browser according to your viewing pleasure.
+## ✨ What's New in GoConvey-Notify
 
-GoConvey supports the current versions of Go (see the official Go
-[release policy](https://golang.org/doc/devel/release#policy)). Currently
-this means Go 1.16 and Go 1.17 are supported.
+- **🎵 Dual Sound Alerts**: Play different sounds for test success vs failure
+- **📱 NTFY Push Notifications**: Real-time notifications to your mobile/desktop via [NTFY](https://ntfy.sh)
+- **🧠 Smart Auto-Detection**: Automatically detects valid configurations without explicit enable flags
+- **🔄 Backward Compatible**: Works seamlessly with existing GoConvey setups
+- **⚙️ JSON Configuration**: Simple file-based configuration with flexible options
 
-**Features:**
+## 🚀 Quick Start
 
-- Directly integrates with `go test`
-- Fully-automatic web UI (works with native Go tests, too)
-- Huge suite of regression tests
-- Shows test coverage
-- Readable, colorized console output (understandable by any manager, IT or not)
-- Test code generator
-- Desktop notifications (optional)
-- Immediately open problem lines in [Sublime Text](http://www.sublimetext.com) ([some assembly required](https://github.com/asuth/subl-handler))
+### Installation
 
+```bash
+go install github.com/dgnsrekt/goconvey-notify@latest
+```
 
-You can ask questions about how to use GoConvey on [StackOverflow](http://stackoverflow.com/questions/ask?tags=goconvey,go&title=GoConvey%3A%20). Use the tags `go` and `goconvey`.
+### Basic Setup
 
-**Menu:**
+1. **Create a configuration file** (`goconvey-notifications.json`):
 
-- [Installation](#installation)
-- [Quick start](#quick-start)
-- [Documentation](#documentation)
-- [Screenshots](#screenshots)
-- [Contributors](#contributors)
-
-
-
-
-Installation
-------------
-
-	$ go install github.com/smartystreets/goconvey
-
-[Quick start](https://github.com/smartystreets/goconvey/wiki#get-going-in-25-seconds)
------------
-
-Make a test, for example:
-
-```go
-package package_name
-
-import (
-    "testing"
-    . "github.com/smartystreets/goconvey/convey"
-)
-
-func TestSpec(t *testing.T) {
-
-	// Only pass t into top-level Convey calls
-	Convey("Given some integer with a starting value", t, func() {
-		x := 1
-
-		Convey("When the integer is incremented", func() {
-			x++
-
-			Convey("The value should be greater by one", func() {
-				So(x, ShouldEqual, 2)
-			})
-		})
-	})
+```json
+{
+    "sound": {
+        "success_file_path": "success.mp3",
+        "failure_file_path": "failure.mp3"
+    },
+    "ntfy": {
+        "server": "https://ntfy.sh",
+        "topic": "my-go-tests",
+        "timeout": 30
+    }
 }
 ```
 
+2. **Run GoConvey with notifications**:
 
-#### [In the browser](https://github.com/smartystreets/goconvey/wiki/Web-UI)
+```bash
+goconvey-notify --config goconvey-notifications.json
+```
 
-Start up the GoConvey web server at your project's path:
+3. **Enable notifications in the web UI** by toggling the Sound and NTFY switches in the settings panel.
 
-	$ $GOPATH/bin/goconvey
+That's it! Now you'll get:
+- 🎵 Different sounds for passing vs failing tests
+- 📱 Push notifications on your devices via NTFY
 
-Then watch the test results display in your browser at:
+## 📋 Configuration Options
 
-	http://localhost:8080
+### Sound Configuration
 
+```json
+{
+    "sound": {
+        "success_file_path": "path/to/success.mp3",
+        "failure_file_path": "path/to/failure.mp3"
+    }
+}
+```
 
-If the browser doesn't open automatically, please click [http://localhost:8080](http://localhost:8080) to open manually.
+**Supported formats**: `.mp3`, `.wav`, `.ogg`, `.m4a`, `.webm`
 
-There you have it.
-![](http://d79i1fxsrar4t.cloudfront.net/goconvey.co/gc-1-dark.png)
-As long as GoConvey is running, test results will automatically update in your browser window.
+**Smart behavior**:
+- ✅ Success sound plays when all tests pass
+- ❌ Failure sound plays when any test fails, panics, or build fails
+- 🔄 Falls back to single sound if only one file is configured
 
-![](http://d79i1fxsrar4t.cloudfront.net/goconvey.co/gc-5-dark.png)
-The design is responsive, so you can squish the browser real tight if you need to put it beside your code.
+### NTFY Configuration
 
+```json
+{
+    "ntfy": {
+        "server": "https://ntfy.sh",
+        "topic": "your-unique-topic",
+        "timeout": 30,
+        "auth_header": "Bearer your-token"
+    }
+}
+```
 
-The [web UI](https://github.com/smartystreets/goconvey/wiki/Web-UI) supports traditional Go tests, so use it even if you're not using GoConvey tests.
+**Options**:
+- `server`: NTFY server URL (default: `https://ntfy.sh`)
+- `topic`: Unique topic name (letters, numbers, `_`, `-` only)
+- `timeout`: Request timeout in seconds (default: 30)
+- `auth_header`: Optional authentication header
 
+### Legacy Support
 
+For backward compatibility, you can still use the old format:
 
-#### [In the terminal](https://github.com/smartystreets/goconvey/wiki/Execution)
+```json
+{
+    "sound": {
+        "file_path": "notification.mp3"
+    }
+}
+```
 
-Just do what you do best:
+This single file will be used for both success and failure.
 
-    $ go test
+## 💡 Usage Examples
 
-Or if you want the output to include the story:
+### Minimal Setup (Sound Only)
 
-    $ go test -v
+```json
+{
+    "sound": {
+        "success_file_path": "ding.mp3",
+        "failure_file_path": "buzz.mp3"
+    }
+}
+```
 
+### NTFY with Custom Server
 
-[Documentation](https://github.com/smartystreets/goconvey/wiki)
------------
+```json
+{
+    "ntfy": {
+        "server": "https://your-ntfy-server.com",
+        "topic": "ci-alerts",
+        "timeout": 15,
+        "auth_header": "Bearer sk-1234567890"
+    }
+}
+```
 
-Check out the
+### Full Configuration
 
-- [GoConvey wiki](https://github.com/smartystreets/goconvey/wiki),
-- [![GoDoc](https://godoc.org/github.com/smartystreets/goconvey?status.png)](http://godoc.org/github.com/smartystreets/goconvey)
-- and the *_test.go files scattered throughout this project.
+```json
+{
+    "sound": {
+        "success_file_path": "assets/success.wav",
+        "failure_file_path": "assets/failure.wav"
+    },
+    "ntfy": {
+        "server": "https://ntfy.sh",
+        "topic": "goconvey-dgnsrekt",
+        "timeout": 30
+    }
+}
+```
 
-Contributors
-----------------------
+### Different Config File
 
-GoConvey is brought to you by [SmartyStreets](https://github.com/smartystreets) and [several contributors](https://github.com/smartystreets/goconvey/graphs/contributors) (Thanks!).
+```bash
+goconvey-notify --config my-custom-config.json --port 9000
+```
+
+## 🔗 Core GoConvey Features
+
+This fork maintains full compatibility with GoConvey's core testing features. For comprehensive documentation on:
+
+- **Writing tests with GoConvey syntax**
+- **Web UI features and navigation**
+- **Integration with `go test`**
+- **Test coverage and reporting**
+
+Please refer to the [original GoConvey documentation](https://github.com/smartystreets/goconvey/wiki).
+
+## 📚 API Reference
+
+GoConvey-Notify adds several new endpoints:
+
+### Configuration Status
+```
+GET /config-status
+```
+Returns JSON indicating which features are configured:
+```json
+{
+    "soundConfigured": true,
+    "successSoundConfigured": true,
+    "failureSoundConfigured": true,
+    "ntfyConfigured": true
+}
+```
+
+### Sound File Endpoints
+```
+GET /sound-file/success  # Serves success sound file
+GET /sound-file/failure  # Serves failure sound file
+GET /sound-file          # Legacy single sound file
+```
+
+### NTFY Notifications
+```
+POST /ntfy
+Content-Type: application/x-www-form-urlencoded
+
+title=Test Results&body=5 passed, 2 failed
+```
+
+## 🛠️ Command Line Options
+
+All original GoConvey options are supported, plus:
+
+```bash
+goconvey-notify [options]
+
+Notification Options:
+  --config string    Path to notification configuration file (default "goconvey-notifications.json")
+
+Standard GoConvey Options:
+  --port int         Port for web server (default 8080)
+  --host string      Host for web server (default "127.0.0.1")
+  --cover            Enable test coverage (default true)
+  --depth int        Directory scanning depth (default -1)
+  --packages int     Parallel package testing (default 10)
+  --poll duration    File system polling interval (default 250ms)
+```
+
+## 🎯 Use Cases
+
+- **🔊 Audio Feedback**: Get immediate audio cues while coding without watching the screen
+- **📱 Remote Monitoring**: Receive push notifications on your phone for CI/CD pipelines
+- **👥 Team Alerts**: Share test results with team members via NTFY topics
+- **🎮 Gamification**: Use fun sounds to make testing more engaging
+- **♿ Accessibility**: Audio cues for developers with visual impairments
+
+## 🤝 Contributing
+
+This project builds on the excellent foundation of [GoConvey by SmartyStreets](https://github.com/smartystreets/goconvey).
+
+For issues specific to the notification features, please use this repository's issue tracker. For core GoConvey functionality, consider contributing to the [original project](https://github.com/smartystreets/goconvey).
+
+## 📄 License
+
+This project maintains the same license as the original GoConvey project. See [LICENSE.md](LICENSE.md) for details.
+
+---
+
+**Credits**: GoConvey-Notify is built on [GoConvey](https://github.com/smartystreets/goconvey) by [SmartyStreets](https://github.com/smartystreets) and [contributors](https://github.com/smartystreets/goconvey/graphs/contributors). Notification features added by [@dgnsrekt](https://github.com/dgnsrekt).
