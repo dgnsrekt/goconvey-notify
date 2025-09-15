@@ -49,6 +49,7 @@ func init() {
 	flag.StringVar(&workDir, "workDir", "", "set goconvey working directory (default current directory).")
 	flag.BoolVar(&autoLaunchBrowser, "launchBrowser", true, "toggle auto launching of browser.")
 	flag.BoolVar(&leakTemp, "leakTemp", false, "leak temp dir with coverage reports.")
+	flag.StringVar(&configFile, "config", "goconvey-notifications.json", "Path to notification configuration file")
 
 	log.SetOutput(os.Stdout)
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -94,7 +95,15 @@ func main() {
 
 	longpollChan := make(chan chan string)
 	executor := executor.NewExecutor(tester, parser, longpollChan)
-	server := api.NewHTTPServer(working, watcherInput, executor, longpollChan)
+
+	// Load notification configuration
+	config, err := api.LoadNotificationConfig(configFile)
+	if err != nil {
+		log.Printf("Failed to load notification config: %v", err)
+		log.Fatal(err)
+	}
+
+	server := api.NewHTTPServer(working, watcherInput, executor, longpollChan, config)
 	listener := createListener()
 	go runTestOnUpdates(watcherOutput, executor, server)
 	go watcher.Listen()
@@ -237,6 +246,11 @@ func serveHTTP(reports string, server contract.Server, listener net.Listener) *h
 	http.HandleFunc("/status", server.Status)
 	http.HandleFunc("/status/poll", server.LongPollStatus)
 	http.HandleFunc("/pause", server.TogglePause)
+	http.HandleFunc("/ntfy", server.SendNTFY)
+	http.HandleFunc("/config-status", server.ConfigStatus)
+	http.HandleFunc("/sound-file", server.SoundFile)
+	http.HandleFunc("/sound-file/success", server.SuccessSoundFile)
+	http.HandleFunc("/sound-file/failure", server.FailureSoundFile)
 
 	http.Handle("/reports/", http.StripPrefix("/reports/", http.FileServer(http.Dir(reports))))
 
@@ -296,6 +310,7 @@ var (
 	excludedDirs      string
 	autoLaunchBrowser bool
 	leakTemp          bool
+	configFile        string
 
 	quarterSecond = time.Millisecond * 250
 	workDir       string

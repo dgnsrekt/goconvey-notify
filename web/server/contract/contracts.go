@@ -13,6 +13,11 @@ type (
 		Results(writer http.ResponseWriter, request *http.Request)
 		Execute(writer http.ResponseWriter, request *http.Request)
 		TogglePause(writer http.ResponseWriter, request *http.Request)
+		SendNTFY(writer http.ResponseWriter, request *http.Request)
+		ConfigStatus(writer http.ResponseWriter, request *http.Request)
+		SoundFile(writer http.ResponseWriter, request *http.Request)
+		SuccessSoundFile(writer http.ResponseWriter, request *http.Request)
+		FailureSoundFile(writer http.ResponseWriter, request *http.Request)
 	}
 
 	Executor interface {

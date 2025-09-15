@@ -425,7 +425,7 @@ func newServerFixture() *ServerFixture {
 	// self.watcher.SetRootWatch(initialRoot)
 	statusUpdate := make(chan chan string)
 	self.executor = newFakeExecutor("", statusUpdate)
-	self.server = NewHTTPServer("initial-working-dir", self.watcher, self.executor, statusUpdate)
+	self.server = NewHTTPServer("initial-working-dir", self.watcher, self.executor, statusUpdate, nil)
 	return self
 }
 

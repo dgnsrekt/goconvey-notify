@@ -200,6 +200,19 @@ function wireup()
 		convey.notificationLevel = level;
 		save('notification-level', level);
 	});
+
+	// Sound settings event handlers
+	$('.enum#sound-enabled').on('click', 'li:not(.sel)', function() {
+		var enabled = $(this).data('sound-enabled');
+		save('sound-enabled', enabled);
+	});
+
+	// NTFY settings event handlers
+	$('.enum#ntfy-enabled').on('click', 'li:not(.sel)', function() {
+		var enabled = $(this).data('ntfy-enabled');
+		save('ntfy-enabled', enabled);
+	});
+
 	// End notification-settings
 
 	convey.layout.header = $('header').first();
@@ -538,7 +551,37 @@ function loadSettingsFromStorage()
 	convey.notificationLevel = notifLevel;
 	enumSel("notification-level", notifLevel);
 
+	// Load notification extension settings
+	loadNotificationExtensions();
+
 	setNotifUI();
+}
+
+function loadNotificationExtensions() {
+	// Fetch config status from server to see what's configured
+	$.get('/config-status')
+		.done(function(data) {
+			// Show sound toggle only if sound is configured on server
+			if (data.soundConfigured) {
+				$('#sound-setting').show();
+				var soundEnabled = get('sound-enabled');
+				if (soundEnabled) {
+					enumSel("sound-enabled", soundEnabled);
+				}
+			}
+
+			// Show NTFY toggle only if NTFY is configured on server
+			if (data.ntfyConfigured) {
+				$('#ntfy-setting').show();
+				var ntfyEnabled = get('ntfy-enabled');
+				if (ntfyEnabled) {
+					enumSel("ntfy-enabled", ntfyEnabled);
+				}
+			}
+		})
+		.fail(function() {
+			log("Failed to load notification configuration status");
+		});
 }
 
 
@@ -846,9 +889,38 @@ function process(data, status, jqxhr)
 			icon: $('.favicon').attr('href')
 		});
 
-                convey.notif.onclick = function() { 
-                  window.focus(); 
+                convey.notif.onclick = function() {
+                  window.focus();
                 };
+
+		// Add sound playback
+		if (get('sound-enabled') === 'true') {
+			var soundUrl;
+			var testHasFailed = current().overall.failedBuilds || current().overall.panics || current().overall.failures;
+
+			if (testHasFailed) {
+				soundUrl = '/sound-file/failure';
+				log("Playing failure sound");
+			} else {
+				soundUrl = '/sound-file/success';
+				log("Playing success sound");
+			}
+
+			var audio = new Audio(soundUrl);
+			audio.play().catch(function(error) {
+				log("Sound playback failed: " + error.message);
+			});
+		}
+
+		// Add NTFY notification
+		if (get('ntfy-enabled') === 'true') {
+			$.post('/ntfy', {
+				title: notifText.title,
+				body: notifText.body
+			}).fail(function(xhr, status, error) {
+				log("NTFY notification failed: " + error);
+			});
+		}
 
 		convey.notifTimer = setTimeout(function() { convey.notif.close(); }, 5000);
 	}
