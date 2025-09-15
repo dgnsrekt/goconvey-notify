@@ -53,96 +53,53 @@ That's it! Now you'll get:
 - Different sounds for passing vs failing tests
 - Push notifications on your devices via NTFY
 
-## Configuration Options
+## Configuration
 
-### Sound Configuration
-
-```json
-{
-    "sound": {
-        "success_file_path": "path/to/success.mp3",
-        "failure_file_path": "path/to/failure.mp3"
-    }
-}
-```
-
-**Supported formats**: `.mp3`, `.wav`, `.ogg`, `.m4a`, `.webm`
-
-**Smart behavior**:
-- Success sound plays when all tests pass
-- Failure sound plays when any test fails, panics, or build fails
-- Falls back to single sound if only one file is configured
-
-### NTFY Configuration
-
-```json
-{
-    "ntfy": {
-        "server": "https://ntfy.sh",
-        "topic": "your-unique-topic",
-        "timeout": 30,
-        "auth_header": "Bearer your-token"
-    }
-}
-```
-
-**Options**:
-- `server`: NTFY server URL (default: `https://ntfy.sh`)
-- `topic`: Unique topic name (letters, numbers, `_`, `-` only)
-- `timeout`: Request timeout in seconds (default: 30)
-- `auth_header`: Optional authentication header
-
-### Legacy Support
-
-For backward compatibility, you can still use the old format:
-
-```json
-{
-    "sound": {
-        "file_path": "notification.mp3"
-    }
-}
-```
-
-This single file will be used for both success and failure.
-
-## Usage Examples
-
-### Minimal Setup (Sound Only)
-
-```json
-{
-    "sound": {
-        "success_file_path": "ding.mp3",
-        "failure_file_path": "buzz.mp3"
-    }
-}
-```
-
-### NTFY with Custom Server
-
-```json
-{
-    "ntfy": {
-        "server": "https://your-ntfy-server.com",
-        "topic": "ci-alerts",
-        "timeout": 15,
-        "auth_header": "Bearer sk-1234567890"
-    }
-}
-```
-
-### Full Configuration
+### Sound Settings
+Configure dual sound alerts with different audio files for success vs failure:
 
 ```json
 {
     "sound": {
         "success_file_path": "assets/success.wav",
         "failure_file_path": "assets/failure.wav"
+    }
+}
+```
+
+- **Supported formats**: `.mp3`, `.wav`, `.ogg`, `.m4a`, `.webm`
+- **Smart behavior**: Success sound for passing tests, failure sound for any test failures, panics, or build errors
+
+### NTFY Push Notifications
+Get real-time notifications on your devices via [NTFY](https://ntfy.sh):
+
+```json
+{
+    "ntfy": {
+        "server": "https://ntfy.sh",
+        "topic": "my-go-tests",
+        "timeout": 30,
+        "auth_header": "Bearer your-token"
+    }
+}
+```
+
+- **server**: NTFY server URL (default: `https://ntfy.sh`)
+- **topic**: Unique topic name (letters, numbers, `_`, `-` only)
+- **timeout**: Request timeout in seconds (default: 30)
+- **auth_header**: Optional authentication header
+
+### Complete Example
+
+```json
+{
+    "sound": {
+        "success_file_path": "sounds/success.mp3",
+        "failure_file_path": "sounds/failure.mp3"
     },
     "ntfy": {
         "server": "https://ntfy.sh",
-        "topic": "goconvey-dgnsrekt",
+        "topic": "goconvey-alerts",
         "timeout": 30
     }
 }
@@ -217,21 +174,21 @@ Standard GoConvey Options:
   --poll duration    File system polling interval (default 250ms)
 ```
 
-## 🎯 Use Cases
+## Use Cases
 
-- **🔊 Audio Feedback**: Get immediate audio cues while coding without watching the screen
-- **📱 Remote Monitoring**: Receive push notifications on your phone for CI/CD pipelines
-- **👥 Team Alerts**: Share test results with team members via NTFY topics
-- **🎮 Gamification**: Use fun sounds to make testing more engaging
-- **♿ Accessibility**: Audio cues for developers with visual impairments
+- **Audio Feedback**: Get immediate audio cues while coding without watching the screen
+- **Remote Monitoring**: Receive push notifications on your phone for CI/CD pipelines
+- **Team Alerts**: Share test results with team members via NTFY topics
+- **Gamification**: Use fun sounds to make testing more engaging
+- **Accessibility**: Audio cues for developers with visual impairments
 
-## 🤝 Contributing
+## Contributing
 
 This project builds on the excellent foundation of [GoConvey by SmartyStreets](https://github.com/smartystreets/goconvey).
 
 For issues specific to the notification features, please use this repository's issue tracker. For core GoConvey functionality, consider contributing to the [original project](https://github.com/smartystreets/goconvey).
 
-## 📄 License
+## License
 
 This project maintains the same license as the original GoConvey project. See [LICENSE.md](LICENSE.md) for details.
 
