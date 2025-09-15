@@ -1,4 +1,4 @@
-# GoConvey-Notify 🔔
+# GoConvey-Notify
 
 **Enhanced GoConvey with Audio & Push Notifications**
 
@@ -7,15 +7,15 @@
 
 A fork of [GoConvey](https://github.com/smartystreets/goconvey) that adds intelligent audio alerts and push notifications to enhance your Go testing workflow.
 
-## ✨ What's New in GoConvey-Notify
+## What's New in GoConvey-Notify
 
-- **🎵 Dual Sound Alerts**: Play different sounds for test success vs failure
-- **📱 NTFY Push Notifications**: Real-time notifications to your mobile/desktop via [NTFY](https://ntfy.sh)
-- **🧠 Smart Auto-Detection**: Automatically detects valid configurations without explicit enable flags
-- **🔄 Backward Compatible**: Works seamlessly with existing GoConvey setups
-- **⚙️ JSON Configuration**: Simple file-based configuration with flexible options
+- **Dual Sound Alerts**: Play different sounds for test success vs failure
+- **NTFY Push Notifications**: Real-time notifications to your mobile/desktop via [NTFY](https://ntfy.sh)
+- **Smart Auto-Detection**: Automatically detects valid configurations without explicit enable flags
+- **Backward Compatible**: Works seamlessly with existing GoConvey setups
+- **JSON Configuration**: Simple file-based configuration with flexible options
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -50,10 +50,10 @@ goconvey-notify --config goconvey-notifications.json
 3. **Enable notifications in the web UI** by toggling the Sound and NTFY switches in the settings panel.
 
 That's it! Now you'll get:
-- 🎵 Different sounds for passing vs failing tests
-- 📱 Push notifications on your devices via NTFY
+- Different sounds for passing vs failing tests
+- Push notifications on your devices via NTFY
 
-## 📋 Configuration Options
+## Configuration Options
 
 ### Sound Configuration
 
@@ -69,9 +69,9 @@ That's it! Now you'll get:
 **Supported formats**: `.mp3`, `.wav`, `.ogg`, `.m4a`, `.webm`
 
 **Smart behavior**:
-- ✅ Success sound plays when all tests pass
-- ❌ Failure sound plays when any test fails, panics, or build fails
-- 🔄 Falls back to single sound if only one file is configured
+- Success sound plays when all tests pass
+- Failure sound plays when any test fails, panics, or build fails
+- Falls back to single sound if only one file is configured
 
 ### NTFY Configuration
 
@@ -106,7 +106,7 @@ For backward compatibility, you can still use the old format:
 
 This single file will be used for both success and failure.
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### Minimal Setup (Sound Only)
 
@@ -154,7 +154,7 @@ This single file will be used for both success and failure.
 goconvey-notify --config my-custom-config.json --port 9000
 ```
 
-## 🔗 Core GoConvey Features
+## Core GoConvey Features
 
 This fork maintains full compatibility with GoConvey's core testing features. For comprehensive documentation on:
 
@@ -165,7 +165,7 @@ This fork maintains full compatibility with GoConvey's core testing features. Fo
 
 Please refer to the [original GoConvey documentation](https://github.com/smartystreets/goconvey/wiki).
 
-## 📚 API Reference
+## API Reference
 
 GoConvey-Notify adds several new endpoints:
 
@@ -198,7 +198,7 @@ Content-Type: application/x-www-form-urlencoded
 title=Test Results&body=5 passed, 2 failed
 ```
 
-## 🛠️ Command Line Options
+## Command Line Options
 
 All original GoConvey options are supported, plus:
 
